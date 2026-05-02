@@ -14,4 +14,5 @@ Please state the filename in which you believe the error occurred, and a screens
 ---
 # Security Vulnerabilities?
 We want our project to be safe.
-If you have found a security vulnerability, please report it to
+If you have found a security vulnerability, please report it to us.
+**Please do NOT use public issues for reporting vulnerabilities.
