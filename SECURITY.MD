@@ -7,7 +7,7 @@ If you discover a security vulnerability, please report it **privately**.
 You can do this by:
 
 * Using GitHub’s private vulnerability reporting feature (recommended)
-* Emailing us at: **[security@yourproject.com](mailto:security@yourproject.com)**
+* Emailing us at: **[hyperiasupport@protonmail.com](mailto:hyperiasupport@protonmail.com)**
 
 ⚠️ Please do **NOT** create a public GitHub issue for security vulnerabilities, as this may put other users at risk.
 
