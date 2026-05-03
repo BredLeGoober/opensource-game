@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>BlockTopia</title>
+  <style>
+    :root { --bg:#07121d; --panel:rgba(10,14,25,0.92); --text:#f5f7ff; --accent:#5de2ff; --accent2:#78ff7f; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #2d6ff2 0%, #07121d 45%); color: var(--text); font-family: Inter, system-ui, sans-serif; overflow: hidden; }
+    #overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(2, 5, 14, 0.88); z-index: 20; }
+    #menu { width: min(460px, calc(100% - 32px)); padding: 26px; background: var(--panel); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; box-shadow: 0 24px 80px rgba(0,0,0,.45); }
+    #menu h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.05em; }
+    #menu p { margin: 0 0 20px; line-height: 1.6; opacity: .85; }
+    #menu label { display: block; margin: 16px 0 8px; font-weight: 600; font-size: .95rem; }
+    #menu input, #menu select { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: var(--text); font-size: 1rem; }
+    #menu button { width: 100%; margin-top: 22px; padding: 14px 16px; border: none; border-radius: 16px; background: var(--accent); color: #07121d; font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform .18s ease, background .2s ease; }
+    #menu button:hover { transform: translateY(-1px); background: #3cc8ff; }
+    #hud { position: absolute; top: 16px; left: 16px; width: min(360px, calc(100% - 32px)); padding: 14px 16px; background: rgba(2,8,24,.72); border-radius: 18px; border: 1px solid rgba(255,255,255,.08); z-index: 5; }
+    #hud strong { display: block; font-size: 1rem; margin-bottom: 6px; }
+    #chat { position: absolute; left: 16px; bottom: 90px; width: min(360px, calc(100% - 32px)); max-height: 260px; padding: 14px 16px; overflow-y: auto; background: rgba(2,8,24,.75); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; font-size: .9rem; line-height: 1.5; z-index: 5; }
+    #chatInputContainer { position: absolute; right: 16px; bottom: 16px; left: auto; width: min(400px, calc(100% - 32px)); display: flex; gap: 10px; z-index: 5; }
+    #chatInput { flex: 1; padding: 14px 16px; border-radius: 16px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); color: var(--text); }
+    #chatButton { padding: 14px 18px; border-radius: 16px; border: none; background: var(--accent2); color: #07121d; font-weight: 700; cursor: pointer; }
+    #mobileControls { display: none; position: absolute; right: 16px; bottom: 120px; gap: 10px; flex-wrap: wrap; max-width: 220px; z-index: 5; }
+    #mobileControls button { width: 100%; padding: 12px 14px; border-radius: 14px; border: none; background: rgba(255,255,255,.08); color: var(--text); font-weight: 600; }
+    #status { position: absolute; right: 16px; top: 16px; padding: 12px 14px; background: rgba(2,8,24,.72); border-radius: 14px; border: 1px solid rgba(255,255,255,.08); z-index: 5; font-size: .9rem; }
+    @media (max-width: 900px) { #mobileControls { display: flex; flex-direction: column; } #chat { bottom: 220px; } #chatInputContainer { width: calc(100% - 32px); right: 16px; left: 16px; } }
+  </style>
+</head>
+<body>
+  <div id="overlay">
+    <div id="menu">
+      <h1>BlockTopia</h1>
+      <p>Build, explore, and chat in a blocky 3D world. Choose Singleplayer for a local terrain or Multiplayer to join friends online.</p>
+      <label for="username">Create an account / username</label>
+      <input id="username" type="text" placeholder="Your name" maxlength="16">
+      <label for="mode">Play mode</label>
+      <select id="mode">
+        <option value="singleplayer">Singleplayer</option>
+        <option value="multiplayer">Multiplayer</option>
+      </select>
+      <button id="startButton">Start BlockTopia</button>
+    </div>
+  </div>
+  <div id="hud">
+    <strong id="playerName">Guest</strong>
+    <div id="gameMode">Mode: Singleplayer</div>
+    <div id="instructions" style="margin-top:12px; font-size:.92rem; opacity:.88;">WASD + mouse on PC. Touch controls on mobile. Pick Place or Break while playing.</div>
+  </div>
+  <div id="status">Waiting to start...</div>
+  <div id="chat"></div>
+  <div id="chatInputContainer">
+    <input id="chatInput" type="text" placeholder="Chat message..." disabled>
+    <button id="chatButton" disabled>Send</button>
+  </div>
+  <div id="mobileControls">
+    <button id="moveForward">Forward</button>
+    <button id="moveBackward">Backward</button>
+    <button id="moveLeft">Left</button>
+    <button id="moveRight">Right</button>
+    <button id="jump">Jump</button>
+    <button id="actionToggle">Place</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+  <script src="js/client.js"></script>
+</body>
+</html>
